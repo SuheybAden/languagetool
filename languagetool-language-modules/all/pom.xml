@@ -167,6 +167,10 @@
         </dependency>
         <dependency>
             <groupId>org.languagetool</groupId>
+            <artifactId>language-so</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.languagetool</groupId>
             <artifactId>language-zh</artifactId>
         </dependency>
         <dependency>
