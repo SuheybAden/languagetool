@@ -19,28 +19,13 @@
 
  package org.languagetool.language;
 
- import com.google.common.cache.CacheBuilder;
- import com.google.common.cache.CacheLoader;
- import com.google.common.cache.LoadingCache;
- import org.jetbrains.annotations.NotNull;
- import org.jetbrains.annotations.Nullable;
+
  import org.languagetool.*;
- import org.languagetool.chunking.Chunker;
- import org.languagetool.languagemodel.LanguageModel;
  import org.languagetool.rules.*;
- import org.languagetool.rules.patterns.PatternRuleLoader;
- import org.languagetool.rules.spelling.SpellingCheckRule;
- import org.languagetool.synthesis.Synthesizer;
- import org.languagetool.tagging.Tagger;
- import org.languagetool.tagging.disambiguation.Disambiguator;
  import org.languagetool.tokenizers.SRXSentenceTokenizer;
  import org.languagetool.tokenizers.SentenceTokenizer;
- import org.languagetool.tokenizers.Tokenizer;
- import org.languagetool.tools.Tools;
- 
- import java.io.File;
+
  import java.io.IOException;
- import java.io.InputStream;
  import java.util.*;
  
  import static java.util.Arrays.asList;
