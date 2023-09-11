@@ -20,9 +20,13 @@
  package org.languagetool.language;
 
 
- import org.languagetool.*;
+ import org.jetbrains.annotations.Nullable;
+import org.languagetool.*;
  import org.languagetool.rules.*;
- import org.languagetool.tokenizers.SRXSentenceTokenizer;
+import org.languagetool.rules.so.MorfologikSomaliSpellerRule;
+import org.languagetool.rules.spelling.SpellingCheckRule;
+import org.languagetool.rules.spelling.hunspell.HunspellRule;
+import org.languagetool.tokenizers.SRXSentenceTokenizer;
  import org.languagetool.tokenizers.SentenceTokenizer;
 
  import java.io.IOException;
@@ -36,11 +40,6 @@
 public class Somali extends Language {
 
   @Override
-  public SentenceTokenizer createDefaultSentenceTokenizer() {
-    return new SRXSentenceTokenizer(this);
-  }
-
-  @Override
   public String getName() {
     return "Somali";
   }
@@ -52,7 +51,7 @@ public class Somali extends Language {
 
   @Override
   public String[] getCountries() {
-    return new String[] {"SO"};
+    return new String[] {"SO", "ET", "KE"};
   }
 
   @Override
@@ -63,12 +62,32 @@ public class Somali extends Language {
   }
 
   @Override
+  public SentenceTokenizer createDefaultSentenceTokenizer() {
+    return new SRXSentenceTokenizer(this);
+  }
+
+  @Override
   public List<Rule> getRelevantRules(ResourceBundle messages, UserConfig userConfig, Language motherTongue, List<Language> altLanguages) throws IOException {
-    return Arrays.asList();
+    return Arrays.asList(
+      new MorfologikSomaliSpellerRule(messages, this, userConfig, altLanguages),
+      new CommaWhitespaceRule(messages),
+      new DoublePunctuationRule(messages),
+      new GenericUnpairedBracketsRule(messages),
+      new UppercaseSentenceStartRule(messages, this),
+      new WordRepeatRule(messages, this),
+      new MultipleWhitespaceRule(messages, this),
+      new SentenceWhitespaceRule(messages)
+      );
   }
 
   @Override
   public LanguageMaintainedState getMaintainedState() {
     return LanguageMaintainedState.ActivelyMaintained;
+  }
+
+  @Nullable
+  @Override
+  protected SpellingCheckRule createDefaultSpellingRule(ResourceBundle messages) throws IOException {
+    return new MorfologikSomaliSpellerRule(messages, this, null, null);
   }
 }

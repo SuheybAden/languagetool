@@ -1,0 +1,6 @@
+# Dictionary properties for so_SO.dict
+
+fsa.dict.separator=+
+fsa.dict.encoding=utf-8
+fsa.dict.encoder=none
+fsa.dict.speller.locale=so_SO
